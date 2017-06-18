@@ -19,9 +19,9 @@ def print_header
 end
 
 def print(students)
-    students.each do |student|
-        puts "#{student[:name]} (#{student[:cohort]} cohort)"
-    end
+    students.each_with_index {|student, index|
+        puts "#{index +1}. #{student[:name]} (#{student[:cohort]} cohort)" }
+
 end
 
 def print_footer(students)
@@ -40,7 +40,7 @@ def input_students
         students << {name: name, cohort: :november}
         puts "Now we have #{students.count} students"
        #get another name from the user
-        name = gets.chomp 
+        name = gets.chomp
     end
     #return the array of students
     students
@@ -51,4 +51,3 @@ students = input_students
 print_header
 print(students)
 print_footer(students)
-
