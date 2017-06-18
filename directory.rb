@@ -37,9 +37,11 @@ def input_students
     name = gets.chomp
         #while the name is not empty, repeat this code
     while !name.empty? do
+      if name[0] == "d" || name[0] == "D"
         students << {name: name, cohort: :november}
         puts "Now we have #{students.count} students"
-       #get another name from the user
+      end  
+      #get another name from the user
         name = gets.chomp
     end
     #return the array of students
