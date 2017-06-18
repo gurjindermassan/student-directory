@@ -19,13 +19,13 @@ def print_header
 end
 
 def print(students)
-    #students.each_with_index {|student, index|
-    #    puts "#{index +1}. #{student[:name]} (#{student[:cohort]} cohort)" }
-    i = 0
-    while i < students.length
-      puts "#{students[i][:name]} (#{students[i][:cohort]} cohort)"
-      i +=1
-    end
+    students.each_with_index {|student, index|
+       puts "#{index +1}. #{student[:name]} (#{student[:cohort]} cohort, #{student[:country]})" }
+    # i = 0
+    # while i < students.length
+    #   puts "#{students[i][:name]} (#{students[i][:cohort]} cohort)"
+    #   i +=1
+    # end
 end
 
 def print_footer(students)
@@ -43,7 +43,7 @@ def input_students
     while !name.empty? do
       #if name[0] == "d" || name[0] == "D"
       if name.length < 12
-        students << {name: name, cohort: :november}
+        students << {name: name, cohort: :november, country: :UK}
         puts "Now we have #{students.count} students"
       end
       #get another name from the user
@@ -55,7 +55,6 @@ end
 #now we write the main body of the program, which calls the methods
 
 students = input_students
-puts students[0]
 print_header
 print(students)
 print_footer(students)
