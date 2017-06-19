@@ -20,7 +20,7 @@ end
 
 def print(students)
     students.each_with_index {|student, index|
-       puts "#{index +1}. #{student[:name]} (#{student[:cohort]} cohort, #{student[:country]})" }
+       puts "#{index +1}. #{student[:name]} (#{student[:cohort]} cohort, #{student[:country]})".center(50)}
     # i = 0
     # while i < students.length
     #   puts "#{students[i][:name]} (#{students[i][:cohort]} cohort)"
