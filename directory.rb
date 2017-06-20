@@ -13,6 +13,10 @@
 # {name:"Norman Bates", cohort: :november}
 #]
 
+DEFAULT_MONTH = "January"
+DEFAULT_COUNTRY = :UK
+
+
 def print_header
     puts "The students of Villains Academy"
     puts "-------------"
@@ -20,7 +24,7 @@ end
 
 def print(students)
     students.each_with_index {|student, index|
-       puts "#{index +1}. #{student[:name]} (#{student[:cohort]} cohort, #{student[:country]})".center(50)}
+       puts "#{index +1}. #{student[:name]} (#{student[:cohort]} cohort, #{student[:country]})"}
     # i = 0
     # while i < students.length
     #   puts "#{students[i][:name]} (#{students[i][:cohort]} cohort)"
@@ -33,24 +37,30 @@ def print_footer(students)
 end
 
 def input_students
-    puts "Please enter the names of the students"
     puts "To finish, just hit return twice"
+
         #create empty array
     students = []
         #get the first name
-    name = gets.chomp
+    name = "initialise"
         #while the name is not empty, repeat this code
     while !name.empty? do
-      #if name[0] == "d" || name[0] == "D"
-      if name.length < 12
-        students << {name: name, cohort: :november, country: :UK}
+        puts "Please enter the names of the students"
+        name = gets.chomp.to_sym
+        if name.empty?
+            break
+        end
+        puts "Please enter cohort month"
+        cohort = gets.chomp.to_sym
+        if cohort.empty?
+            cohort = DEFAULT_MONTH
+        end
+        students << {name: name, cohort: cohort, country: DEFAULT_COUNTRY}
         puts "Now we have #{students.count} students"
-      end
-      #get another name from the user
-        name = gets.chomp
+
     end
     #return the array of students
-    students
+    return students.sort_by {|month| month[:cohort] }
 end
 #now we write the main body of the program, which calls the methods
 
