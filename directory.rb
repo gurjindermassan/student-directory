@@ -33,7 +33,10 @@ def print(students)
 end
 
 def print_footer(students)
-    puts "Overall, we have #{students.count} great students."
+  if students.count > 1
+        puts "Overall, we have #{students.count} great students."
+  else  puts "Overall, we have #{students.count} great student."
+  end
 end
 
 def input_students
@@ -56,8 +59,10 @@ def input_students
             cohort = DEFAULT_MONTH
         end
         students << {name: name, cohort: cohort, country: DEFAULT_COUNTRY}
-        puts "Now we have #{students.count} students"
-
+        if students.count > 1
+              puts "Now we have #{students.count} students"
+        else  puts "Now we have #{students.count} student"
+        end
     end
     #return the array of students
     return students.sort_by {|month| month[:cohort] }
