@@ -49,7 +49,7 @@ def input_students
         #while the name is not empty, repeat this code
     while !name.empty? do
         puts "Please enter the names of the students"
-        name = gets.chomp.to_sym
+        name = gets.delete!("\n").to_sym
         if name.empty?
             break
         end
