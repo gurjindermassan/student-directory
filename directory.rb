@@ -23,8 +23,10 @@ def print_header
 end
 
 def print(students)
+  if !students.empty?
     students.each_with_index {|student, index|
        puts "#{index +1}. #{student[:name]} (#{student[:cohort]} cohort, #{student[:country]})"}
+  end
     # i = 0
     # while i < students.length
     #   puts "#{students[i][:name]} (#{students[i][:cohort]} cohort)"
@@ -33,7 +35,7 @@ def print(students)
 end
 
 def print_footer(students)
-  if students.count > 1
+  if students.count = 1
         puts "Overall, we have #{students.count} great students."
   else  puts "Overall, we have #{students.count} great student."
   end
@@ -59,7 +61,7 @@ def input_students
             cohort = DEFAULT_MONTH
         end
         students << {name: name, cohort: cohort, country: DEFAULT_COUNTRY}
-        if students.count > 1
+        if students.count = 1
               puts "Now we have #{students.count} students"
         else  puts "Now we have #{students.count} student"
         end
