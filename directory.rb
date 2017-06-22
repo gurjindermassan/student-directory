@@ -28,12 +28,12 @@ def input_students
     name = "initialise"
     while !name.empty? do
         puts "Please enter the names of the students"
-        name = gets.delete!("\n").to_sym
+        name = STDIN.gets.chomp.to_sym
         if name.empty?
             break
         end
         puts "Please enter cohort month"
-        cohort = gets.chomp.to_sym
+        cohort = STDIN.gets.chomp.to_sym
         if cohort.empty?
             cohort = DEFAULT_MONTH
         end
@@ -48,7 +48,7 @@ end
 def interactive_menu
   loop do
     print_menu
-    process(gets.chomp)
+    process(STDIN.gets.chomp)
     end
   end
 
@@ -96,8 +96,8 @@ def interactive_menu
     file.close
   end
 
-  def load_students
-    file = File.open("students.csv", "r")
+  def load_students(filename = "students.csv")
+    file = File.open(filename, "r")
     file.readlines.each do |line|
       name, cohort = line.chomp.split(',')
       @students << {name: name, cohort: cohort.to_sym}
@@ -105,5 +105,17 @@ def interactive_menu
     file.close
   end
 
+def try_load_students
+  filename = ARGV.first #first argument from the command line
+  return if filename.nil? #exit the method if it isn't given
+  if File.exists?(filename)
+    load_students(filename)
+    puts "Loaded #{@students.count} from #{filename}"
+  else
+    puts "Sorry, #{filename} doesn't exist"
+    exit #quit the program
+  end
+end
 
+try_load_students
 interactive_menu
