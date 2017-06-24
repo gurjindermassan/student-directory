@@ -11,15 +11,16 @@ end
 def print_students_list
   if !@students.empty?
     @students.each_with_index {|student, index|
-       puts "#{index +1}. #{student[:name]} (#{student[:cohort]} cohort, #{student[:country]})"}
+       puts "#{index +1}. #{student[:name]} (#{student[:cohort]} cohort)"}
   end
 
 end
 
 def print_footer
   if @students.count == 1
-        puts "Overall, we have #{@students.count} great students."
-  else  puts "Overall, we have #{@students.count} great student."
+      puts "Overall, we have #{@students.count} great student."
+  else
+      puts "Overall, we have #{@students.count} great students."
   end
 end
 
@@ -37,36 +38,37 @@ def input_students
         if cohort.empty?
             cohort = DEFAULT_MONTH
         end
-        @students << {name: name, cohort: cohort, country: DEFAULT_COUNTRY}
+        add_student(name, cohort)
         if @students.count == 1
-              puts "Now we have #{@students.count} students"
-        else  puts "Now we have #{@students.count} student"
+            puts "Now we have #{@students.count} student"
+        else
+            puts "Now we have #{@students.count} students"
         end
     end
 end
 
 def interactive_menu
-  loop do
-    print_menu
-    process(STDIN.gets.chomp)
+    loop do
+        print_menu
+        process(STDIN.gets.chomp)
     end
-  end
+end
 
-  def print_menu
+ def print_menu
     puts "1. Input the students"
     puts "2. Show the students"
     puts "3. Save the list to students.csv"
     puts "4. Load the list from students.csv"
     puts "9. Exit"
-  end
+ end
 
-  def show_students
+ def show_students
     print_header
     print_students_list
     print_footer
-  end
+ end
 
-  def process(selection)
+def process(selection)
     case selection
       when "1"
         input_students
@@ -81,10 +83,9 @@ def interactive_menu
       else
         puts "I don't know what you meant, try again"
     end
-  end
+end
 
-
-  def save_students
+def save_students
     #open file for writing
     file = File.open("students.csv", "w")
     #iterate over the array of students
@@ -94,16 +95,16 @@ def interactive_menu
       file.puts csv_line
     end
     file.close
-  end
+end
 
-  def load_students(filename = "students.csv")
+def load_students(filename = "students.csv")
     file = File.open(filename, "r")
     file.readlines.each do |line|
       name, cohort = line.chomp.split(',')
-      @students << {name: name, cohort: cohort.to_sym}
+      add_student(name, cohort)
     end
     file.close
-  end
+end
 
 def try_load_students
   filename = ARGV.first #first argument from the command line
@@ -115,6 +116,10 @@ def try_load_students
     puts "Sorry, #{filename} doesn't exist"
     exit #quit the program
   end
+end
+
+def add_student(name, cohort)
+  @students << {name: name, cohort: cohort.to_sym}
 end
 
 try_load_students
